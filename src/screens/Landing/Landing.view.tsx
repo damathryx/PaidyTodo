@@ -2,14 +2,10 @@ import React from 'react';
 
 import * as LocalAuthentication from 'expo-local-authentication';
 import * as IntentLauncher from 'expo-intent-launcher';
-import {
-  Button,
-  ButtonContainer,
-  ButtonText,
-  Container,
-  SetupText,
-} from './Landing.style';
+import { Container, SetupText } from './Landing.style';
 import { Alert, Linking, Platform } from 'react-native';
+import { login } from '../../effector/auth';
+import AppButton from '../../components/primitives/AppButton';
 
 const LandingView = () => {
   const onPress = async () => {
@@ -25,17 +21,13 @@ const LandingView = () => {
         Alert.alert('Error', res.error);
       }
     } else {
-      Alert.alert('nice');
+      login();
     }
   };
   return (
     <Container>
       <SetupText>Setup Authentication to Proceed</SetupText>
-      <ButtonContainer>
-        <Button onPress={onPress}>
-          <ButtonText>Go To Settings</ButtonText>
-        </Button>
-      </ButtonContainer>
+      <AppButton label="Go To Settings" onPress={onPress} />
     </Container>
   );
 };
